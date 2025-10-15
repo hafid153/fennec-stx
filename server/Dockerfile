@@ -1,12 +1,16 @@
-# Utilise l'image Puppeteer officielle
+# Use officel puppeteer image
 FROM ghcr.io/puppeteer/puppeteer:latest
 
-# Copie ton code
+USER root
+
 COPY . /app
 WORKDIR /app
 
-# Installe les dépendances Node.js (dans ton app)
+RUN chown -R pptruser:pptruser /app
+
+USER pptruser
+
 RUN npm install
 
-# Lance ton serveur
 CMD ["node", "server.js"]
+
